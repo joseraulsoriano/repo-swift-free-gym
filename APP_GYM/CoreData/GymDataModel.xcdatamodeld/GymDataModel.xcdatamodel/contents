@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22758" systemVersion="24A335" minimumToolsVersion="Automatic" sourceType="built" userDefinedModelVersionIdentifier="">
+	<entity name="CDBodyMetric" representedClassName="CDBodyMetric" syncable="YES" codeGenerationType="class">
+		<attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+		<attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+		<attribute name="photoPath" optional="YES" attributeType="String"/>
+		<attribute name="type" optional="YES" attributeType="String"/>
+		<attribute name="userId" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+		<attribute name="value" optional="NO" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+	</entity>
+	<entity name="CDFitnessGoal" representedClassName="CDFitnessGoal" syncable="YES" codeGenerationType="class">
+		<attribute name="exerciseName" optional="YES" attributeType="String"/>
+		<attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+		<attribute name="isActive" optional="NO" attributeType="Boolean" usesScalarValueType="YES"/>
+		<attribute name="metric" optional="YES" attributeType="String"/>
+		<attribute name="startDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+		<attribute name="startValue" optional="NO" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+		<attribute name="targetDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+		<attribute name="targetValue" optional="NO" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+		<attribute name="type" optional="YES" attributeType="String"/>
+		<attribute name="userId" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+	</entity>
+	<entity name="CDPerformedExercise" representedClassName="CDPerformedExercise" syncable="YES" codeGenerationType="class">
+		<attribute name="exerciseName" optional="YES" attributeType="String"/>
+		<attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+		<attribute name="order" optional="NO" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+		<attribute name="sessionId" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+		<relationship name="session" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDWorkoutSession" inverseName="performedExercises" inverseEntity="CDWorkoutSession"/>
+		<relationship name="sets" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CDSet" inverseName="performedExercise" inverseEntity="CDSet"/>
+	</entity>
+	<entity name="CDRoutine" representedClassName="CDRoutine" syncable="YES" codeGenerationType="class">
+		<attribute name="daysPerWeek" optional="NO" attributeType="Integer 32" defaultValueString="3" usesScalarValueType="YES"/>
+		<attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+		<attribute name="name" optional="YES" attributeType="String"/>
+		<attribute name="userId" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+		<relationship name="exercises" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CDRoutineExercise" inverseName="routine" inverseEntity="CDRoutineExercise"/>
+	</entity>
+	<entity name="CDRoutineExercise" representedClassName="CDRoutineExercise" syncable="YES" codeGenerationType="class">
+		<attribute name="exerciseName" optional="YES" attributeType="String"/>
+		<attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+		<attribute name="order" optional="NO" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+		<attribute name="targetReps" optional="YES" attributeType="String"/>
+		<attribute name="targetSets" optional="NO" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+		<relationship name="routine" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDRoutine" inverseName="exercises" inverseEntity="CDRoutine"/>
+	</entity>
+	<entity name="CDSet" representedClassName="CDSet" syncable="YES" codeGenerationType="class">
+		<attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+		<attribute name="order" optional="NO" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+		<attribute name="performedExerciseId" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+		<attribute name="repetitions" optional="NO" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+		<attribute name="restTime" optional="NO" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+		<attribute name="weight" optional="NO" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+		<relationship name="performedExercise" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDPerformedExercise" inverseName="sets" inverseEntity="CDPerformedExercise"/>
+	</entity>
+	<entity name="CDWorkoutSession" representedClassName="CDWorkoutSession" syncable="YES" codeGenerationType="class">
+		<attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+		<attribute name="duration" optional="NO" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+		<attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+		<attribute name="routineId" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+		<relationship name="performedExercises" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CDPerformedExercise" inverseName="session" inverseEntity="CDPerformedExercise"/>
+	</entity>
+</model>
