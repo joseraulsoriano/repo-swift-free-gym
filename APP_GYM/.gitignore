@@ -1,0 +1,33 @@
+# Xcode / build
+DerivedData/
+build/
+*.xcuserstate
+*.xccheckout
+xcuserdata/
+
+# SwiftPM
+.swiftpm/
+
+# macOS
+.DS_Store
+
+# Datos locales / bases de datos
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+*.store
+
+# Resultados de tests y análisis
+*.xcresult
+
+# Documentación de configuración (no versionar; mantener solo README en la raíz)
+/ARQUITECTURA_Y_RECOMENDACIONES.md
+/CLOUDKIT_SETUP.md
+/CONFIGURACION_SIGN_IN_APPLE.md
+/CONFIGURACION_WIDGETS.md
+APP_GYM/Components/README.md
+
+# Secretos / entorno local
+.env
+.env.*
+*.pem
